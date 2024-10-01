@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class CalculatorController {
 
-  @GetMapping(value = "/sum/{a}/{b}") // @PathVariable int x -> "(x)"
+  @GetMapping(value = "/sum/{a}/{b}") // @PathVariable int x -> "{x}"
   public int sum(@PathVariable(value = "b") int x, 
     @PathVariable(value = "a") int y) {
       System.out.println("x=" + x + ", y=" + y);
