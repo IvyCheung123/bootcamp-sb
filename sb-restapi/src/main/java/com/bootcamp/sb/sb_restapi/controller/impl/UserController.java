@@ -1,6 +1,7 @@
 package com.bootcamp.sb.sb_restapi.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.sb.sb_restapi.controller.UserOperation;
 import com.bootcamp.sb.sb_restapi.model.User;
@@ -14,5 +15,10 @@ public class UserController implements UserOperation {
   @Override
   public User[] getUsers() {
     return userService.getUsers();
+  }
+
+  @Override
+  public User getUser(String userId) {
+    return userService.getUser(Long.parseLong(userId));
   }
 }

@@ -5,4 +5,6 @@ import com.bootcamp.sb.sb_restapi.model.User;
 
 public interface UserService {
   User[] getUsers();
+
+  User getUser(Long userId);
 }

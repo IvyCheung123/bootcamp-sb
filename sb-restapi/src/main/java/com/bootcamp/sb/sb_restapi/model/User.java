@@ -8,36 +8,36 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter // serialization
-@Setter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class User {
-  private int id;
+  private Long id;
   private String name;
   private String username;
   private String email;
-  private Address adress;
+  private Address address;
   private String phone;
   private String website;
   private Company company;
 
-  private class Address {
+  // One-to-one
+  @Getter
+  private static class Address {
     private String street;
     private String suite;
     private String city;
     private String zipcode;
     private Geo geo;
 
-    private class Geo {
+    @Getter
+    private static class Geo {
       private String lat;
       private String lng;
     }
   }
 
-  private class Company {
+  // One-to-one
+  @Getter
+  private static class Company {
     private String name;
     private String catchPhrase;
     private String bs;
