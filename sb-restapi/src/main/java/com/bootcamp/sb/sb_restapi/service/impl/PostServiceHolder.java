@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.bootcamp.sb.sb_restapi.entity.PostEntity;
+import com.bootcamp.sb.sb_restapi.entity.UserEntity;
 import com.bootcamp.sb.sb_restapi.lib.Scheme;
 import com.bootcamp.sb.sb_restapi.lib.UrlManager;
 import com.bootcamp.sb.sb_restapi.model.Post;
@@ -70,5 +71,14 @@ public class PostServiceHolder implements PostService {
       .filter(post -> post.getUserId().equals(userId))
       .map(post -> mapper.mapPostToPostDTO(post))
       .collect(Collectors.toList());
+  }
+
+  @Override
+  public PostEntity createNewPost(Long userId, String title, String body) {
+    return postRepository.save(PostEntity.builder()
+      .userId(userId)
+      .title(title)
+      .body(body)
+      .build());
   }
 }

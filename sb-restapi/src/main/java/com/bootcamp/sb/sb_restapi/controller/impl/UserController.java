@@ -1,16 +1,22 @@
 package com.bootcamp.sb.sb_restapi.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.sb.sb_restapi.controller.UserOperation;
 import com.bootcamp.sb.sb_restapi.model.User;
+import com.bootcamp.sb.sb_restapi.model.UserRequest;
+import com.bootcamp.sb.sb_restapi.model.mapping.Mapper;
 import com.bootcamp.sb.sb_restapi.service.UserService;
 
 @RestController // @Controller + @Response
 public class UserController implements UserOperation {
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private Mapper mapper;
 
   @Override
   public User[] getUsers() {
@@ -20,5 +26,13 @@ public class UserController implements UserOperation {
   @Override
   public User getUser(String userId) {
     return userService.getUser(Long.parseLong(userId));
+  }
+
+  @Override
+  public User createNewUser(@RequestBody UserRequest userRequest) {
+    String name = userRequest.getName();
+    String email = userRequest.getEmail();
+    String phone = userRequest.getPhone();
+    return mapper.mapUserEntityToUser(userService.createNewUser(name, email, phone));
   }
 }

@@ -1,6 +1,7 @@
 package com.bootcamp.sb.sb_restapi.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Builder
 public class User {
   private Long id;
   private String name;
@@ -21,6 +23,7 @@ public class User {
 
   // One-to-one
   @Getter
+  @Builder
   private static class Address {
     private String street;
     private String suite;
@@ -29,6 +32,7 @@ public class User {
     private Geo geo;
 
     @Getter
+    @Builder
     private static class Geo {
       private String lat;
       private String lng;
@@ -37,6 +41,7 @@ public class User {
 
   // One-to-one
   @Getter
+  @Builder
   private static class Company {
     private String name;
     private String catchPhrase;

@@ -45,4 +45,23 @@ public class Mapper {
       .body(post.getTitle())
       .build();
   }
+
+  public User mapUserEntityToUser(UserEntity userEntity) {
+    return User.builder()
+      .name(userEntity.getName())
+      .username(userEntity.getUsername())
+      .email(userEntity.getEmail())
+      .phone(userEntity.getPhone())
+      .website(userEntity.getWebsite())
+      .build();
+  }
+
+  public Post mapPostEntityToPost(PostEntity postEntity) {
+    return Post.builder()
+      .userId(postEntity.getUserId())
+      .id(postEntity.getId())
+      .title(postEntity.getTitle())
+      .body(postEntity.getBody())
+      .build();
+  }
 }

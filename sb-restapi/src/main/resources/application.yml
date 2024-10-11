@@ -17,9 +17,8 @@ spring:
     password: "admin1234"
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create-drop # update
-      # ddl-auto: none -> ?
+    hibernate: # Framework for CRUD of Spring and DB
+      ddl-auto: create-drop # update, create, none
 
 # MySQL
 # spring:

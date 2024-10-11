@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostEntity {
+  private Long userId;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
   private Long id;
   private String title;
   private String body;
