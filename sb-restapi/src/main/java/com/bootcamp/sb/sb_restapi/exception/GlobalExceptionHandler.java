@@ -17,22 +17,13 @@ public class GlobalExceptionHandler {
       .build();
   } // you throw -> agent will bring this throw to here for handling
 
-  @ExceptionHandler(BusinessException.class)
-  public ErrorResponse businessExceptionHandler() {
-    return ErrorResponse.builder()
-      .code(ErrorCode.BUSINESS_EXCEPTION.getCode())
-      .message(ErrorCode.BUSINESS_EXCEPTION.getMessage())
-      .build();
-  }
-
-  // 包底 e.g. Exception in RestTemplate
-  @ExceptionHandler(Exception.class)
-  public ErrorResponse businessExceptionHandler2(ErrorCode errorCode) {
-    return ErrorResponse.builder()
-      .code(errorCode.getCode())
-      .message(errorCode.getMessage())
-      .build();
-  }
+  // @ExceptionHandler(BusinessException.class)
+  // public ErrorResponse businessExceptionHandler() {
+  //   return ErrorResponse.builder()
+  //     .code(ErrorCode.BUSINESS_EXCEPTION.getCode())
+  //     .message(ErrorCode.BUSINESS_EXCEPTION.getMessage())
+  //     .build();
+  // }
 
   @ExceptionHandler(UserIdNotFoundException.class)
   public ErrorResponse userIdNotFoundExceptionHandler() {
@@ -42,8 +33,9 @@ public class GlobalExceptionHandler {
       .build();
   }
 
-  @ExceptionHandler(UserIdNotFoundException.class)
-  public ErrorResponse userIdNotFoundExceptionHandler2(ErrorCode errorCode) {
+  // 包底 e.g. Exception in RestTemplate
+  @ExceptionHandler(Exception.class)
+  public ErrorResponse userIdNotFoundExceptionHandler(ErrorCode errorCode) {
     return ErrorResponse.builder()
       .code(errorCode.getCode())
       .message(errorCode.getMessage())
