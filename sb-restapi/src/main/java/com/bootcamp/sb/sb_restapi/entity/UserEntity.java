@@ -13,10 +13,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+// Hibernate -> @Entity
 @Entity // JPA creates table if table not exists in database
 @Table(name = "Users")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

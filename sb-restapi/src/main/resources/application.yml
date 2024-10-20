@@ -8,28 +8,22 @@ api:
       user: "/users"
       post: "/posts"
 
-# Postgres
-spring:
-  datasource:
-    driverClassName: "org.postgresql.Driver"
-    url: "jdbc:postgresql://localhost:5432/bc2405p_db"
-    username: "postgres"
-    password: "admin1234"
-  jpa:
-    show-sql: true
-    hibernate: # Framework for CRUD of Spring and DB
-      ddl-auto: create-drop # update, create, none
-
-# MySQL
 # spring:
 #   datasource:
-#     driverClassName: "com.mysql.cj.jdbc.Driver"
-#     url: "jdbc:mysql://localhost:3306/bc2405p_db"
-#     username: "root"
+#     driverClassName: "org.postgresql.Driver"
+#     url: "jdbc:postgresql://localhost:5432/bc2405p_db"
+#     username: "postgres"
 #     password: "admin1234"
 #   jpa:
 #     show-sql: true
-#     properties:
-#       hibernate:
-#         ddl-auto: create # update
-#         dialect: "org.hibernate.dialect.MySQL8Dialect"
+#     hibernate.ddl-auto: create-drop # update, create, none
+
+spring:
+  datasource:
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://localhost:3306/bc2405p_db"
+    username: "root"
+    password: "admin1234"
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: create

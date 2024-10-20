@@ -1,12 +1,16 @@
 package com.bootcamp.sb.sb_restapi.service.impl;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import com.bootcamp.sb.sb_restapi.entity.UserEntity;
+import com.bootcamp.sb.sb_restapi.exception.BusinessException;
+import com.bootcamp.sb.sb_restapi.exception.ErrorCode;
 import com.bootcamp.sb.sb_restapi.lib.Scheme;
 import com.bootcamp.sb.sb_restapi.lib.UrlManager;
 import com.bootcamp.sb.sb_restapi.model.User;
@@ -82,5 +86,26 @@ public class UserServiceHolder implements UserService {
       .email(email)
       .phone(phone)
       .build());
+  }
+
+  @Override
+  public Optional<UserEntity> getUserFromDBById(Long id) {
+    return this.userRepository.findById(id);
+  }
+
+  // @Override
+  // public Boolean deleteUserFromDBById(Long id) {
+  //   if (!(this.userRepository.existsById(id)))
+  //     return false;
+  //   this.userRepository.deleteById(id);
+  //   return true;
+  // }
+
+  // Controller -> Service.deleteUserFromDBById()
+  @Override
+  public void deleteUserFromDBById(Long id) {
+    if (!(this.userRepository.existsById(id)))
+      throw new BusinessException(ErrorCode.USER_ID_NOT_FOUND_EXCEPTION);
+    this.userRepository.deleteById(id);
   }
 }
