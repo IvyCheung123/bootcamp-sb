@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import com.bootcamp.sb.sb_restapi.entity.UserEntity;
 import com.bootcamp.sb.sb_restapi.exception.BusinessException;
-import com.bootcamp.sb.sb_restapi.exception.ErrorCode;
+import com.bootcamp.sb.sb_restapi.lib.ErrorCode;
 import com.bootcamp.sb.sb_restapi.lib.Scheme;
 import com.bootcamp.sb.sb_restapi.lib.UrlManager;
 import com.bootcamp.sb.sb_restapi.model.User;

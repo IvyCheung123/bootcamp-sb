@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.bootcamp.sb.sb_restapi.entity.UserEntity;
+import com.bootcamp.sb.sb_restapi.lib.GeneralResponse;
 import com.bootcamp.sb.sb_restapi.model.User;
 import com.bootcamp.sb.sb_restapi.model.UserRequest;
 
@@ -42,4 +43,8 @@ public interface UserOperation {
   @PatchMapping(value = "/db/user/{id}")
   @ResponseStatus(HttpStatus.ACCEPTED)
   User updateEmail(@RequestParam Long id, @RequestParam String email); // update email only
+
+  // @GetMapping(value = "/user")
+  // GeneralResponse<User> getUserByUsername(@RequestParam("username") String username);
+  // Controller layer: UserEntity -> User -> GeneralResponse<User>
 }

@@ -1,8 +1,8 @@
-package com.bootcamp.sb.sb_restapi.exception;
+package com.bootcamp.sb.sb_restapi.lib;
 
 import lombok.Getter;
 
-@Getter
+@Getter // enum and library do not use Lombok
 public enum ErrorCode {
     USER_ID_NOT_FOUND_EXCEPTION(1, "User ID Not Found Exception"),
     BUSINESS_EXCEPTION(2, "Business Exception"),

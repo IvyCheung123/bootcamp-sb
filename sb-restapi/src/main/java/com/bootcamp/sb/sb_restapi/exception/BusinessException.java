@@ -1,5 +1,6 @@
 package com.bootcamp.sb.sb_restapi.exception;
 
+import com.bootcamp.sb.sb_restapi.lib.ErrorCode;
 import lombok.Getter;
 
 @Getter

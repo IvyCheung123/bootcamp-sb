@@ -29,3 +29,22 @@ public class UserRequest {
 ```
 
   Postman: Body -> raw -> JSON
+
+# GeneralResponse
+```json
+{
+  "code": "000000",
+  "message": "Success",
+  "data": [{
+
+  }, {
+
+  }]
+}
+
+{
+  "code": "000000",
+  "message": "Fail",
+  "data": []
+}
+```

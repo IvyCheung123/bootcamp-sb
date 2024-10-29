@@ -1,20 +1,12 @@
-package com.bootcamp.sb.sb_restapi.model;
+package com.bootcamp.sb.sb_demo.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
-  private Long id;
+  private int id;
   private String name;
   private String username;
   private String email;
@@ -23,28 +15,26 @@ public class User {
   private String website;
   private Company company;
 
-  // One-to-one
   @Getter
   @Builder
-  private static class Address {
+  static class Address {
     private String street;
     private String suite;
     private String city;
     private String zipcode;
     private Geo geo;
-
-    @Getter
-    @Builder
-    private static class Geo {
-      private String lat;
-      private String lng;
-    }
   }
 
-  // One-to-one
   @Getter
   @Builder
-  private static class Company {
+  static class Geo {
+    private String lat;
+    private String lng;
+  }
+
+  @Getter
+  @Builder
+  static class Company {
     private String name;
     private String catchPhrase;
     private String bs;
