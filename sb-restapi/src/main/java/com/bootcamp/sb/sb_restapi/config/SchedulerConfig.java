@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 // SchedularConfig -> can perform regular check
 // @EnableScheduling in Application.java
 @Component
-public class SchedularConfig {
+public class SchedulerConfig {
   // main thread: listening web layer ...
 
   // @Scheduled(fixedDelay = 5000) // 5000ms = 5s

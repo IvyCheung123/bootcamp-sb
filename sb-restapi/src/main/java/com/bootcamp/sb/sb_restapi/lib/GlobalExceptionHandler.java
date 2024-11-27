@@ -1,16 +1,15 @@
-package com.bootcamp.sb.sb_restapi.exception;
+package com.bootcamp.sb.sb_restapi.lib;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import com.bootcamp.sb.sb_restapi.lib.ErrorCode;
-import com.bootcamp.sb.sb_restapi.lib.GeneralResponse;
-import com.bootcamp.sb.sb_restapi.lib.SysCode;
+import com.bootcamp.sb.sb_restapi.exception.BusinessException;
+import com.bootcamp.sb.sb_restapi.exception.UserIdNotFoundException;
 
 // 1. Happy: Controller -> Method A -> Method B -> Method C -> return object to B -> return object to A
 // 2. Unhappy: Controller -> Method A -> Method B -> Method C -> throw exception -> B handle exception (try-catch each time) ...
 // 3. Happy: Controller -> Method A -> Method B -> Method C -> throw exception -> GlobalExceptionHandler -> do not try-catch in B
 // common exception have uniform exception handling, will not have different handling in each class
-@RestControllerAdvice
+
+// @RestControllerAdvice
 public class GlobalExceptionHandler {
   // try to catch BusinessException
   @ExceptionHandler(BusinessException.class)

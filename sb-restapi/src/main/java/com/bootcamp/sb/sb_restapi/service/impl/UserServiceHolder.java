@@ -62,7 +62,7 @@ public class UserServiceHolder implements UserService {
       Arrays.asList(users).stream()
         .forEach(user -> {
         // convert User object to UserEntity object
-        UserEntity userEntity = mapper.mapUserToUserEntity(user);
+        UserEntity userEntity = mapper.map(user);
         userRepository.save(userEntity);
       });
     } else {
@@ -107,5 +107,21 @@ public class UserServiceHolder implements UserService {
     if (!(this.userRepository.existsById(id)))
       throw new BusinessException(ErrorCode.USER_ID_NOT_FOUND_EXCEPTION);
     this.userRepository.deleteById(id);
+  }
+
+  @Override
+  public UserEntity getUserByUsername(String username) {
+    return this.userRepository.findByUsername(username);
+  }
+
+  @Override
+  public List<User> getUsersFromWebsite() {
+    String url = UrlManager.builder()
+      .scheme(Scheme.HTTPS)
+      .domain(this.domain)
+      .endpoint(this.endpoint)
+      .build()
+      .toString();
+    return Arrays.asList(this.restTemplate.getForObject(url, User[].class));
   }
 }

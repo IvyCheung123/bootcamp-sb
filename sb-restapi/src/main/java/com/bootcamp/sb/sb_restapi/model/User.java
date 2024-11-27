@@ -44,7 +44,7 @@ public class User {
   // One-to-one
   @Getter
   @Builder
-  private static class Company {
+  public static class Company {
     private String name;
     private String catchPhrase;
     private String bs;

@@ -1,5 +1,6 @@
 package com.bootcamp.sb.sb_restapi.controller.impl;
 
+import java.util.List;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties.Schema;
@@ -33,10 +34,10 @@ public class PostController implements PostOperation {
     return postService.getPost(Long.parseLong(postId));
   }
 
-  @Override
-  public Post createNewPost(@PathVariable String userId, @RequestBody NewPost newPost) {
-    String title = newPost.getTitle();
-    String body = newPost.getBody();
-    return mapper.mapPostEntityToPost(postService.createNewPost(Long.parseLong(userId), title, body));
-  }
+  // @Override
+  // public Post createNewPost(@PathVariable String userId, @RequestBody NewPost newPost) {
+  //   String title = newPost.getTitle();
+  //   String body = newPost.getBody();
+  //   return mapper.mapPostEntityToPost(postService.createNewPost(Long.parseLong(userId), title, body));
+  // }
 }

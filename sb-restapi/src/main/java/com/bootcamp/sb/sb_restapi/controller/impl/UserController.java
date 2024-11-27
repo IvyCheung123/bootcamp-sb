@@ -14,6 +14,8 @@ import com.bootcamp.sb.sb_restapi.entity.UserEntity;
 import com.bootcamp.sb.sb_restapi.exception.BusinessException;
 import com.bootcamp.sb.sb_restapi.exception.UserIdNotFoundException;
 import com.bootcamp.sb.sb_restapi.lib.ErrorCode;
+import com.bootcamp.sb.sb_restapi.lib.GeneralResponse;
+import com.bootcamp.sb.sb_restapi.lib.SysCode;
 import com.bootcamp.sb.sb_restapi.model.User;
 import com.bootcamp.sb.sb_restapi.model.UserRequest;
 import com.bootcamp.sb.sb_restapi.model.mapping.Mapper;
@@ -104,5 +106,15 @@ public class UserController implements UserOperation {
     existUser.setEmail(email);
     userRepository.save(existUser);
     return mapper.mapUserEntityToUser(existUser);
+  }
+
+  @Override
+  public GeneralResponse<User> getUserByUsername(@RequestParam String username) {
+    UserEntity userEntity = userService.getUserByUsername(username);
+    User user = mapper.mapUserEntityToUser(userEntity);
+    return GeneralResponse.<User>builder()
+      .status(SysCode.OK)
+      .data(List.of(user))
+      .build();
   }
 }

@@ -44,7 +44,7 @@ public interface UserOperation {
   @ResponseStatus(HttpStatus.ACCEPTED)
   User updateEmail(@RequestParam Long id, @RequestParam String email); // update email only
 
-  // @GetMapping(value = "/user")
-  // GeneralResponse<User> getUserByUsername(@RequestParam("username") String username);
   // Controller layer: UserEntity -> User -> GeneralResponse<User>
+  @GetMapping(value = "/getUserByUsername")
+  GeneralResponse<User> getUserByUsername(@RequestParam String username);
 }

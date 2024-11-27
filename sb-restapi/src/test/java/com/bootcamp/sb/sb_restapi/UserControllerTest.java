@@ -1,25 +1,19 @@
 package com.bootcamp.sb.sb_restapi;
 
-import java.util.Optional;
-import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PathVariable;
-import com.bootcamp.sb.sb_restapi.controller.impl.UserController;
 import com.bootcamp.sb.sb_restapi.entity.UserEntity;
-import com.bootcamp.sb.sb_restapi.lib.SysCode;
 import com.bootcamp.sb.sb_restapi.service.UserService;
 
 // @SpringBootTest // Full scale of SpringContext
-@WebMvcTest // A test spring environment, consist of web related beans + some other beans for test (e.g. MockMvc)
+@WebMvcTest // A test spring environment, consist of web related (controller) beans + some other beans for test (e.g. MockMvc)
 public class UserControllerTest {
   // @Autowired
   // private UserController userController;
@@ -32,6 +26,13 @@ public class UserControllerTest {
   @MockBean
   private UserService userService;
 
+  // @WebMvcTest(controllers = (BankUserController.class))
+  // In order to create the bean of BankUserController for this testing environment
+  // BankMapper bean is required
+  // so we have to add the BankMapper explicitly
+  // @SpyBean
+  // private BankMapper bankMapper;
+
   /*
    * public UserEntity getUserFromDBById(@PathVariable Long id) {
    *   Optional<UserEntity> userEntity = this.userService.getUserFromDBById(id);
@@ -43,7 +44,7 @@ public class UserControllerTest {
    */
 
   @Test
-  void testGetUserFromDBById() throws Exception {
+  void testGetUserByUsername() throws Exception {
     // Postman -> URL -> Spring Boot Controller -> Service
     // Spring Web contains Mockito, no need to inject dependency
 
@@ -52,15 +53,22 @@ public class UserControllerTest {
       .name("Betty")
       .website("betty.com")
       .build();
-    Mockito.when(userService.getUserByUsername("John").thenReturn(userEntity));
+    Mockito.when(userService.getUserByUsername("John")).thenReturn(userEntity);
   
   // Test
-  this.mockMvc.perform(MockMvcRequestBuilders.get("/user").param("username", "John"))
+  // this.mockMvc.perform(MockMvcRequestBuilders.get("/user").param("username", "John"))
+  //   .andExpect(MockMvcResultMatchers.status().isOk())
+  //   .andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.is("000000")))
+  //   .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Success"))) // Matchers.is() -> calling String.equals()
+  //   .andExpect(MockMvcResultMatchers.jsonPath("$.data.[*].name").value(Matchers.hasItem("Betty")))
+  //   .andExpect(MockMvcResultMatchers.jsonPath("$.data.[*].website").value(Matchers.hasItem("betty.com")));
+
+  this.mockMvc.perform(get("/getUserByUsername").param("username", "John"))
   // post("/")? pathVariable?
-    .andExpect(MockMvcResultMatchers.status().isOk())
-    .andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.is("000000")))
-    .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Success"))) // Matchers.is() -> calling String.equals()
-    .andExpect(MockMvcResultMatchers.jsonPath("$.data.[*].name").value(Matchers.hasItem("Betty")))
-    .andExpect(MockMvcResultMatchers.jsonPath("$.data.[*].website").value(Matchers.hasItem("betty.com")));
+    .andExpect(status().isOk())
+    .andExpect(jsonPath("$.code", is("000000")))
+    .andExpect(jsonPath("$.message", is("Success"))) // Matchers.is() -> calling String.equals()
+    .andExpect(jsonPath("$.data.[*].name").value(hasItem("Betty")))
+    .andExpect(jsonPath("$.data.[*].website").value(hasItem("betty.com")));
   }
 }

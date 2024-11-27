@@ -18,4 +18,8 @@ public interface UserService {
   // Boolean deleteUserFromDBById(Long id);
 
   void deleteUserFromDBById(Long id);
+
+  UserEntity getUserByUsername(String username);
+
+  List<User> getUsersFromWebsite();
 }

@@ -9,7 +9,7 @@ import com.bootcamp.sb.sb_restapi.model.User;
 public class GeneralResponse<T> { // ApiResponse
   private String code;
   private String message;
-  private List<T> data;
+  private List<T> data; // -> T data -> refer to vincent github
 
   // static method <U>
   public static <T> Builder<T> builder() {
@@ -87,5 +87,15 @@ public class GeneralResponse<T> { // ApiResponse
       .build();
 
     System.out.println(generalResponse);
+
+    // GeneralResponse<List<User>> generalResponse = GeneralResponse.<User>builder() // define type of static method with Generic
+    //   .status(SysCode.OK)
+    //   .data(List.of(new User(), new User(), new User()))
+    //   .build();
+    
+    // GeneralResponse<Map<String, String>> generalResponse = GeneralResponse.<User>builder() // define type of static method with Generic
+    //   .status(SysCode.OK)
+    //   .data(Map)
+    //   .build();
   }
 }

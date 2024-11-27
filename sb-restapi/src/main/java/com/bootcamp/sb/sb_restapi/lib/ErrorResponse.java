@@ -1,4 +1,4 @@
-package com.bootcamp.sb.sb_restapi.exception;
+package com.bootcamp.sb.sb_restapi.lib;
 
 import lombok.Builder;
 import lombok.Getter;

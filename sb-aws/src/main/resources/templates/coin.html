@@ -1,0 +1,45 @@
+<!-- coin.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Coin Data</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="/js/coinLoader.js"></script>
+    </head>
+    <body>
+        <h1>Cryptocurrencies</h1>
+        <table class="tcoins">
+          <thead>
+            <tr>
+              <th>Coin</th>
+              <th>Current Price (USD)</th>
+              <th>Price Change (24h)</th>
+              <th>Market Capitalization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="coinData : ${coinList}" th:attr="data-coin-id=${coinData.id}">
+              <td>
+                <div>
+                  <div class="coin-details">
+                    <img class="coin-img" th:src="${coinData.image}" alt="Coin Image">
+                    <span class="coin-name" th:text="${coinData.name}"></span>
+                    <span class="coin-symbol" th:text="${coinData.symbol}"></span>
+                  </div>
+                  <div class="last-updated" th:text="${#temporals.format(coinData.lastUpdated, 'yyyy-MM-dd HH:mm:ss')} + ' HKT'"></div>
+                </div>
+              </td>
+              <td th:text="'$' + ${coinData.currentPrice}"></td>
+              <td>
+                <span th:class="${coinData.priceChangePercentage24h > 0 ? 'up' : (coinData.priceChangePercentage24h < 0 ? 'down' : 'neutral')}">
+                  <span th:text="${coinData.priceChangePercentage24h > 0 ? '▲' : (coinData.priceChangePercentage24h < 0 ? '▼' : '-')}" style="margin-right: 5px;"></span>
+                  <span th:text="${#numbers.formatDecimal(coinData.priceChangePercentage24h < 0 ? -coinData.priceChangePercentage24h : coinData.priceChangePercentage24h, 0, 'COMMA', 2, 'POINT')} + '%'"></span>
+                </span>
+              </td>
+              <td th:text="'$' + ${#numbers.formatDecimal(coinData.marketCap, 1, 'COMMA', 2, 'POINT')}"></td>
+            </tr>
+          </tbody>
+        </table>
+    </body>
+</html>

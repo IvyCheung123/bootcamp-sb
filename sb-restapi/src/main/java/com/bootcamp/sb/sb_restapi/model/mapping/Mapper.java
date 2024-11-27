@@ -1,6 +1,7 @@
 package com.bootcamp.sb.sb_restapi.model.mapping;
 
 import org.springframework.stereotype.Component;
+import com.bootcamp.sb.sb_restapi.entity.CompanyEntity;
 import com.bootcamp.sb.sb_restapi.entity.PostEntity;
 import com.bootcamp.sb.sb_restapi.entity.UserEntity;
 import com.bootcamp.sb.sb_restapi.model.Post;
@@ -10,7 +11,7 @@ import com.bootcamp.sb.sb_restapi.model.UserPostDTO;
 
 @Component // keep instance
 public class Mapper {
-  public UserEntity mapUserToUserEntity(User user) {
+  public UserEntity map(User user) {
     return UserEntity.builder()
       .name(user.getName())
       .username(user.getUsername())
@@ -20,9 +21,8 @@ public class Mapper {
       .build();
   }
 
-  public PostEntity mapPostToPostEntity(Post post) {
+  public PostEntity map(Post post) {
     return PostEntity.builder()
-      .userId(post.getUserId())
       .id(post.getId())
       .title(post.getTitle())
       .body(post.getBody())
@@ -58,10 +58,17 @@ public class Mapper {
 
   public Post mapPostEntityToPost(PostEntity postEntity) {
     return Post.builder()
-      .userId(postEntity.getUserId())
       .id(postEntity.getId())
       .title(postEntity.getTitle())
       .body(postEntity.getBody())
+      .build();
+  }
+
+  public CompanyEntity mapUserToCompanyEntity(User.Company company) {
+    return CompanyEntity.builder()
+      .name(company.getName())
+      .catchPhrase(company.getCatchPhrase())
+      .bs(company.getBs())
       .build();
   }
 }
